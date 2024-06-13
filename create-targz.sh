@@ -30,3 +30,10 @@ exit
 sudo tar -czf debian-installer.tar.gz -C ~/debian-installer/rootfs .
 
 echo "ISO image successfully bootstrapped"
+
+echo "Copying debian-installer.tar.gz to windows machine..."
+
+# copies the tar.gz onto windows
+
+cd ~/debian-installer
+cp debian-installer.tar.gz /mnt/c/Users/$USER/Onedrive/Desktop
