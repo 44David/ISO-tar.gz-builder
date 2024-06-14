@@ -10,15 +10,20 @@ sudo mkdir -p ~/debian-installer
 cd ~/debian-installer
 
 # create a bootstrap of ISO
-sudo cdebootstrap --arch amd64 bookworm --include=vim,git,ssh,man ~/debian-installer/rootfs http://deb.debian.org/debian
+
+if [ "$1" == "debian" ]
+    then 
+        sudo cdebootstrap --arch amd64 bookworm --include=vim,git,ssh,man ~/debian-installer/rootfs http://deb.debian.org/debian
+fi
+
+if [ "$2" == "dev" ]
+    then 
+        sudo cdebootstrap --arch amd64 bookworm --include=vim,git,ssh,man,bash,node,golang,python3,mysql,curl, ~/debian-installer/rootfs http://deb.debian.org/debian
 
 # installs necessary packages in directory
 sudo chroot ~/debian-installer/rootfs /bin/bash
 
 apt-get update
-# apt-get install -y wget git
-# # apt-get install -y wget vim,sudo,git,ssh,gnupg,man,curl
-
 
 apt-get clean
 rm -rf /var/lib/apt/lists/*
@@ -36,4 +41,4 @@ echo "Copying debian-installer.tar.gz to windows machine..."
 # copies the tar.gz onto windows
 
 cd ~/debian-installer
-cp debian-installer.tar.gz /mnt/c/Users/$USER/Onedrive/Desktop
+cp debian-installer.tar.gz /mnt/c
